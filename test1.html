@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>joey.js test getXsS async load w/ callback</title>
+    <script src="joey.js"></script>
+    function loadJquery()
+    {
+      getXsS('https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
+              ,false
+              ,function(){jQuery('.d1').text('jQuery loaded. Test passes.');}
+      );
+    }
+    setTimeout(function(){loadJquery();},1000);
+  </head>
+  <body>
+    <div class="d1">Loading jQuery...</div>
+  </body>
+</html>
+  
