@@ -27,7 +27,7 @@ window.joey=(function(){
    * the script will load async. if a callback is provided, to load async. w/o callback, pass in 
    * an empty function as the callback:    getXsS(url,false,function(){});
    **/ 
-  var getXsS = function(url,donotpreventcache,callback)
+  var getXsS = function(url,donotpreventcache)
   {
     if(donotpreventcache){donotpreventcache=true;}else{donotpreventcache=false;}
     var ss = 's' + 'cr' + 'ip' + 't';
@@ -40,20 +40,9 @@ window.joey=(function(){
       if((''+url).indexOf('?')==-1){tsstr='?'+tsstr;}else{tsstr='&'+tsstr;}
     }
     var url2 = url+tsstr;
-    if(callback && typeof(callback)=='function')
-    {
-      
-      var v1="<"+ss+" async=\"async\" onload="
-        +JSON.stringify(callback.name+"();")+" src="
-        +JSON.stringify(url2)+"></"+ss+">";
-      cst.insertAdjacentHTML("afterEnd",v1);
-    }
-    else
-    {
-      var e=document.createElement(ss);
-      e.src=url2;
-      cst.parentElement.appendChild(e,cst);
-    }
+    var e=document.createElement(ss);
+    e.src=url2;
+    cst.parentElement.appendChild(e,cst);
   };
   rtn.getXsS=getXsS;
 
