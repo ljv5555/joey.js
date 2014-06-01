@@ -24,14 +24,15 @@ window.joey=(function(){
   
   /**
    * adds script tag as the last element in the parent node of the last script tag
+   * the script will load async. if a callback is provided, to load async. w/o callback, pass in 
+   * an empty function as the callback:    getXsS(url,false,function(){});
    **/ 
-  var getXsS = function(url,donotpreventcache)
+  var getXsS = function(url,donotpreventcache,callback)
   {
     if(donotpreventcache){donotpreventcache=true;}else{donotpreventcache=false;}
     var ss = 's' + 'cr' + 'ip' + 't';
     var cst = document.getElementsByTagName(ss)[document.getElementsByTagName(ss).length-1];
-    var e = document.createElement(ss);
-    e.async='async';
+    var e=document.createElement(ss);
     var tsstr = '';
     if(donotpreventcache===false)
     {
@@ -40,8 +41,17 @@ window.joey=(function(){
       if((''+url).indexOf('?')==-1){tsstr='?'+tsstr;}else{tsstr='&'+tsstr;}
     }
     var url2 = url+tsstr;
-    e.src=url2;
-    cst.parentNode.parentElement.appendChild(e);
+    if(callback && typeof(callback)=='function')
+    {
+      e.innerHTML="document.write(<"+ss+" async=\"async\" onload="
+        +JSON.stringify(callback.name+"();")+" src="
+        +JSON.stringify(url2)+"></"+ss+">");
+    }
+    else
+    {
+      e.src=url2;
+    }
+    cst.parentElement.appendChild(e,cst);
   };
 
   return rtn;
