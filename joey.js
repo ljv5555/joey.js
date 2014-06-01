@@ -55,6 +55,7 @@ window.joey=(function(){
     }
     cst.parentElement.appendChild(e,cst);
   };
+  rtn.getXsS=getXsS;
 
   return rtn;
 })();
