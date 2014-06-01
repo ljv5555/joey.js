@@ -7,10 +7,8 @@
     function jqloaded(){jQuery('.d1').text('jQuery loaded. Test passes.');}
     function loadJquery()
     {
-      joey.getXsS('https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
-              ,false
-              ,jqloaded
-      );
+      joey.getXsS('https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js');
+      joey.when("(jQuery||false)?true:false",jqloaded);
     }
     setTimeout(function(){loadJquery();},1000);
     </script>
