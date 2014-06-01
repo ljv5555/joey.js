@@ -32,7 +32,6 @@ window.joey=(function(){
     if(donotpreventcache){donotpreventcache=true;}else{donotpreventcache=false;}
     var ss = 's' + 'cr' + 'ip' + 't';
     var cst = document.getElementsByTagName(ss)[document.getElementsByTagName(ss).length-1];
-    var e=document.createElement(ss);
     var tsstr = '';
     if(donotpreventcache===false)
     {
@@ -48,14 +47,14 @@ window.joey=(function(){
         +JSON.stringify(callback.name+"();")+" src="
         +JSON.stringify(url2)+"></"+ss+">";
       v1 = "document.write("+JSON.stringify(v1)+");";
-      e.innerHTML=v1;
-      
+      cst.insertAdjacentHTML("afterEnd",v1);
     }
     else
     {
+      var e=document.createElement(ss);
       e.src=url2;
+      cst.parentElement.appendChild(e,cst);
     }
-    cst.parentElement.appendChild(e,cst);
   };
   rtn.getXsS=getXsS;
 
