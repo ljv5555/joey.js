@@ -43,12 +43,13 @@ window.joey=(function(){
     var url2 = url+tsstr;
     if(callback && typeof(callback)=='function')
     {
-      //e.innerHTML
+      
       var v1="<"+ss+" async=\"async\" onload="
         +JSON.stringify(callback.name+"();")+" src="
         +JSON.stringify(url2)+"></"+ss+">";
       v1 = "document.write("+JSON.stringify(v1)+");";
-      console.log('v1='+v1+'_________');
+      e.innerHTML=v1;
+      
     }
     else
     {
