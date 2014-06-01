@@ -8,7 +8,7 @@
     function loadJquery()
     {
       joey.getXsS('https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js');
-      joey.when("(jQuery||false)?true:false",jqloaded);
+      joey.when("(function(){try{return (jQuery||false)?true:false;}catch(ee){}return false;})()",jqloaded);
     }
     setTimeout(function(){loadJquery();},1000);
     </script>
